@@ -19,7 +19,7 @@ def generate_strong_password_my(num: int, boolean1: bool, boolean2: bool):
             pw+=use_char[random.randint(0,(char)-1)]
     return (pw)
 
-def generate_strong_password(num: int, boolean1: bool, boolean2: bool):
+def generate_strong_password_other(num: int, boolean1: bool, boolean2: bool):
     pw=""
     for i in range(num):
         if boolean1==True and boolean2==True:
@@ -31,8 +31,33 @@ def generate_strong_password(num: int, boolean1: bool, boolean2: bool):
         else:
             pw+=random.choice(string.ascii_lowercase)
     return pw
+def generate_strong_password(num: int, boolean1: bool, boolean2: bool):
+    pw_list=[]
+    password=""
+    for i in range(num):
+        if boolean1==True:
+            if len(pw_list)==num:
+                break
+            pw_list.append(random.choice(string.digits))
+            
+        if boolean2==True:
+            if len(pw_list)==num:
+                break
+            pw_list.append(random.choice("!?=+-()#"))
+            
+        if True:
+            if len(pw_list)==num:
+                break
+            pw_list.append(random.choice(string.ascii_lowercase))
+            random.shuffle(pw_list)
+        random.shuffle(pw_list)
+    
+    for item in pw_list:
+        password+=item
+    return password
+
 def main():
     for i in range(10):
-        print(generate_strong_password(5, False, True))
+        print(generate_strong_password(5, True, True))
 if __name__=="__main__":
     main()
