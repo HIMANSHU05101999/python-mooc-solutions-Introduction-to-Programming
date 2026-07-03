@@ -1,7 +1,7 @@
 # Write your solution here
 import csv
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime,timedelta
 def cheaters():
     start_dict={}
     cheater_list=[]
@@ -11,20 +11,12 @@ def cheaters():
         for line in csv.reader(start_file,delimiter=";"):
            start_dict[line[0]]=datetime.strptime(line[1],'%H:%M')
         for line in csv.reader(sub_file,delimiter=";"):
-            print(line)
+            if line[0] in start_dict:
+                    if datetime.strptime(line[3],'%H:%M')-start_dict[line[0]]>timedelta(hours=3):
+                        if line[0] not in cheater_list: 
+                            cheater_list.append(line[0])
+        return(cheater_list)
    
-        for key,val in start_dict.items():
-            if key in line:
-                if datetime.strptime(line[3],'%H:%M')-val>3:
-                    cheater_list.append(key)
-        print(cheater_list)
-
-
-            
-                    
-
-   
-       
 def main():
     cheaters()
 if __name__=="__main__":
