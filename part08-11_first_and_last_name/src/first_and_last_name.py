@@ -15,8 +15,6 @@ class Person:
         
 
 
-
-
 def main():
     peter = Person("Peter Pythons")
     print(peter.return_first_name())
