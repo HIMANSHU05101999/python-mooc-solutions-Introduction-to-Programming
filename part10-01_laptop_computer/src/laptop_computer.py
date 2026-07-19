@@ -11,3 +11,20 @@ class Computer:
     @property
     def speed(self):
         return self.__speed
+    def __str__(self):
+        return (f"{self.__model}, {self.__speed} MHz")
+    
+class LaptopComputer(Computer):
+    def __init__(self, model, speed, weight):
+        super().__init__(model, speed)
+        self.__weight=weight
+
+    
+    def __str__(self):
+        return (f"{super().__str__()}, {self.__weight} kg")
+    
+def main():
+    laptop = LaptopComputer("NoteBook Pro15", 1500, 2)
+    print(laptop)
+if __name__=="__main__":
+    main()
