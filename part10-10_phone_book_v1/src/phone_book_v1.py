@@ -1,4 +1,5 @@
 # WRITE YOUR SOLUTION HERE:
+from pathlib import Path
 class PhoneBook:
     def __init__(self):
         self.__persons = {}
@@ -15,13 +16,19 @@ class PhoneBook:
             return None
         return self.__persons[name]
 
+    def get_name(self, number: str):
+        for name, numbers in self.__persons.items():
+            if number in numbers:
+                return name
+        return None
 
     def all_entries(self):
         return self.__persons
 
 class FileHandler():
     def __init__(self, filename):
-        self.__filename = filename
+        file_name = Path(__file__).parent / filename
+        self.__filename = file_name
 
     def load_file(self):
         names = {}
@@ -53,6 +60,7 @@ class PhoneBookApplication:
         print("0 exit")
         print("1 add entry")
         print("2 search")
+        print("3 search by number")
 
     def add_entry(self):
         name = input("name: ")
@@ -67,6 +75,15 @@ class PhoneBookApplication:
             return
         for number in numbers:
             print(number)
+
+    def search_by_num(self):
+        num=input("number: ")
+        name=self.__phonebook.get_name(num)
+        if name == None:
+            print("unknown number")
+        else:
+            print(name)
+
 
     def exit(self):
         self.__filehandler.save_file(self.__phonebook.all_entries())
@@ -84,9 +101,13 @@ class PhoneBookApplication:
                 self.add_entry()
             elif command == "2":
                 self.search()
+            elif command == "3":
+                self.search_by_num()
             else:
                 self.help()
 
 # when you run the tests, nothing apart from these two lines should be placed in the main function, outside any class definitions 
-application = PhoneBookApplication()
+
+application = PhoneBookApplication()    
 application.execute()
+
