@@ -1,7 +1,30 @@
 
 # Write your solution here:
+class Person:
+    def __init__(self, name: str):
+        self.__name=name
+        self.__number=[]
+        self.__address=None
+
+    def name(self):
+        return self.__name
+    
+    def numbers(self):
+        return self.__number
+
+    def address(self):
+        return self.__address
+
+    def add_number(self, num: str):
+        self.__number.append(num)
+
+    def add_address(self, addr: str):
+        self.__address=addr
+
+
 class PhoneBook:
     def __init__(self):
+#        super().__init_(self):
         self.__persons = {}
 
     def add_number(self, name: str, number: str):
@@ -57,5 +80,8 @@ class PhoneBookApplication:
 
 
 # when testing, no code should be outside application except the following:
-application = PhoneBookApplication()
-application.execute()
+#application = PhoneBookApplication()
+#application.execute()
+h = Person("Erkki")
+h.name()
+
