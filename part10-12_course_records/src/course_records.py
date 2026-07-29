@@ -42,12 +42,31 @@ class MarkSheet:
             else:
                 self.__scorecard[course.name]=course
 
-
     def get_course_data(self, name):
         if name in self.__scorecard:
             print(self.__scorecard[name])
         else:
             print("no entry for this course")
+
+    def stats(self):
+        course_completed=len(self.__scorecard)
+        if course_completed==0:
+            print("No Course Completed")
+        else:
+            grade={5:"",4:"",3:"",2:"",1:""}
+            total_credits=0
+            total_grade=0
+            for key, val in self.__scorecard.items():
+                total_credits+=val.credits 
+                total_grade+=val.grade
+                if val.grade in grade:
+                    grade[val.grade]+="x"
+            mean_grade=total_grade/course_completed
+            print(f"{course_completed} completed courses, a total of {total_credits} credits mean {mean_grade:.1f} grade distribution")
+            for key,items in grade.items():
+                print(f" {key}: {items}",end="")
+            
+
 
     def to_dict(self):
         return self.__scorecard
@@ -79,7 +98,7 @@ class Intrerface:
                 name=input("Course Name:")
                 self.view_course(name)
             if choice=="3":
-                pass
+                self.stats()
             if choice=="0":
                 return
 
@@ -89,6 +108,10 @@ class Intrerface:
     def add_course(self, name, grade, credit):
         course=Course(name,grade,credit)
         self.__marksrep.add_course(course)
+
+    def stats(self):
+        self.__marksrep.stats()
+
 
     def todict(self):
         return self.__marksrep.__dict__
