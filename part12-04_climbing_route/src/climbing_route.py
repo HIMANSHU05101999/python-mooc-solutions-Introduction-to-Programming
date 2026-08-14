@@ -8,3 +8,23 @@ class ClimbingRoute:
         return f"{self.name}, length {self.length} metres, grade {self.grade}"
 
 # Write your solution herer:
+def sort_by_length(routes: list):
+    def sort_length(item: ClimbingRoute):
+        return item.length
+    return sorted(routes,key=sort_length,reverse=True)
+
+def sort_by_difficulty(routes: list):
+    def sort_difficulty(item: ClimbingRoute):
+        return (item.grade,item.length)
+    return sorted(routes,key=sort_difficulty,reverse=True)
+
+if __name__=="__main__":
+    r1 = ClimbingRoute("Edge", 38, "6A+")
+    r2 = ClimbingRoute("Smooth operator", 11, "7A")
+    r3 = ClimbingRoute("Synchro", 14, "8C+")
+    r4 = ClimbingRoute("Small steps", 12, "6A+")
+
+    routes = [r1, r2, r3, r4]
+
+    for route in sort_by_length(routes):
+        print(route)
