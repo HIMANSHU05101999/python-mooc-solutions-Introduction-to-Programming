@@ -12,11 +12,9 @@ def count_subordinates(employee):
     if employee.subordinates==[]:
         return 0
 
-
     for subordinate in employee.subordinates:
         val+=count_subordinates(subordinate)+1
     
-
     return val
 
 if __name__ == "__main__":
